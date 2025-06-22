@@ -14,4 +14,8 @@
       <Folder Include="Controllers\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\RateLimit.Infrastructure\RateLimit.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
