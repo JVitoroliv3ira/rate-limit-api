@@ -6,4 +6,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Dtos\Commands\" />
+      <Folder Include="UseCases\ApiKeys\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RateLimit.Domain\RateLimit.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
