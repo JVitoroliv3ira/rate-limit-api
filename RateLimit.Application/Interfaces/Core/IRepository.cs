@@ -1,10 +1,15 @@
+using System.Linq.Expressions;
+
 namespace RateLimit.Application.Interfaces.Core;
 
 public interface IRepository<T> where T : class
 {
-    Task<T?> GetByIdAsync(int id);
-    Task AddAsync(T entity);
+    Task<T?> GetByAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
+    Task<IList<T>> ListByAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
+    Task DeleteByAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
+    Task<bool> ExistByAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
+
+    Task AddAsync(T entity, CancellationToken cancellationToken);
     Task UpdateAsync(T entity);
-    void Delete(T entity);
     IQueryable<T> Queryable { get; }
 }
