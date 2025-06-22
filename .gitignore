@@ -1,0 +1,72 @@
+# Build results
+**/bin/
+**/obj/
+**/out/
+
+# User-specific files
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# VS Code settings
+**/.vscode/
+
+# Rider settings
+**/.idea/
+
+# User-specific files
+**/*.userprefs
+
+# DotCover
+**/.dotCover/
+
+# Backup & log files
+**/*.bak
+**/*.log
+**/~$*
+
+# Test results
+**/TestResults/
+**/coverage/
+**/coverage*.json
+**/coverage*.xml
+**/coverage*.lcov
+**/lcov-report/
+
+# NCrunch
+**/.ncrunch*
+**/*_ncrunch*
+
+# Resharper
+**/_ReSharper*/
+**/*.ReSharper
+
+# Dotnet CLI
+**/.vs/
+**/.dbmdl
+**/.DS_Store
+
+# NuGet
+**/packages/
+**/nuget.exe
+**/project.lock.json
+**/project.fragment.lock.json
+**/artifacts/
+
+# Entity Framework
+**/Migrations/
+
+# Azure build artifacts
+**/*.azurePubxml
+**/*.pubxml
+**/*.publish.xml
+
+# Others
+**/Generated_Code/
+**/objdumps/
+**/.terraform/
+**/.env
+**/.secrets/
+**/*.env
+**/*.secret
