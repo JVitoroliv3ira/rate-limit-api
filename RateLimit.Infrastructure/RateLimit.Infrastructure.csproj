@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\RateLimit.Application\RateLimit.Application.csproj" />
       <ProjectReference Include="..\RateLimit.Domain\RateLimit.Domain.csproj" />
     </ItemGroup>
 
