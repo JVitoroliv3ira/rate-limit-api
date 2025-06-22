@@ -12,7 +12,7 @@ public class V001_CreateUsersTable : Migration
         Create.Table(TableName)
             .WithColumn("ID").AsInt32().PrimaryKey().Identity()
             .WithColumn("EMAIL").AsString(100).NotNullable()
-            .WithColumn("PASSWORD").AsString(360).NotNullable()
+            .WithColumn("PASSWORD").AsString(60).NotNullable()
             .WithColumn("PLAN").AsInt32().NotNullable().WithDefaultValue(0);
     }
 
