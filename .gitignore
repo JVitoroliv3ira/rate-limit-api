@@ -54,9 +54,6 @@
 **/project.fragment.lock.json
 **/artifacts/
 
-# Entity Framework
-**/Migrations/
-
 # Azure build artifacts
 **/*.azurePubxml
 **/*.pubxml
