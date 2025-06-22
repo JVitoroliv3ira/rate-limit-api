@@ -6,18 +6,24 @@ using RateLimit.Application.Interfaces.Core;
 using RateLimit.Application.Interfaces.Services;
 using RateLimit.Application.UseCases.Users;
 using RateLimit.Domain.Entities;
+using RateLimit.Tests.Mocks;
 
 namespace RateLimit.Tests.UseCases;
 
 public class CreateUserUseCaseTests
 {
-    private readonly Mock<IRepository<User>> _userRepositoryMock = new();
-    private readonly Mock<IPasswordHasher> _passwordHasherMock = new();
-    private readonly Mock<IUnitOfWork> _unitOfWorkMock = new();
+    private readonly Mock<IRepository<User>> _userRepositoryMock;
+    private readonly Mock<IPasswordHasher> _passwordHasherMock;
+    private readonly Mock<IUnitOfWork> _unitOfWorkMock;
+
     private readonly CreateUserUseCase _sut;
 
     public CreateUserUseCaseTests()
     {
+        _userRepositoryMock = UserRepositoryMock.Create();
+        _passwordHasherMock = PasswordHasherMock.Create();
+        _unitOfWorkMock = UnitOfWorkMock.Create();
+
         _sut = new CreateUserUseCase(
             _userRepositoryMock.Object,
             _unitOfWorkMock.Object,
@@ -46,6 +52,7 @@ public class CreateUserUseCaseTests
     public async Task Should_Return_Success_When_Email_Not_In_Use()
     {
         var command = NewUserCommand();
+
         SetupValidUserCreation(command);
 
         var result = await _sut.ExecuteAsync(command, CancellationToken.None);
@@ -62,6 +69,7 @@ public class CreateUserUseCaseTests
     public async Task Should_Hash_Password_When_Creating_User()
     {
         var command = NewUserCommand();
+
         SetupValidUserCreation(command);
 
         await _sut.ExecuteAsync(command, CancellationToken.None);
@@ -73,6 +81,7 @@ public class CreateUserUseCaseTests
     public async Task Should_Save_User_With_Hashed_Password_And_Free_Plan()
     {
         var command = NewUserCommand();
+
         SetupValidUserCreation(command);
 
         await _sut.ExecuteAsync(command, CancellationToken.None);
@@ -91,14 +100,12 @@ public class CreateUserUseCaseTests
     public async Task Should_Commit_Transaction()
     {
         var command = NewUserCommand();
+
         SetupValidUserCreation(command);
 
         await _sut.ExecuteAsync(command, CancellationToken.None);
 
-        _unitOfWorkMock.Verify(
-            x => x.CommitAsync(It.IsAny<CancellationToken>()),
-            Times.Once
-        );
+        _unitOfWorkMock.Verify(x => x.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 
     private static CreateUserCommand NewUserCommand() =>
@@ -117,10 +124,6 @@ public class CreateUserUseCaseTests
         _userRepositoryMock
             .Setup(x => x.AddAsync(It.IsAny<User>(), It.IsAny<CancellationToken>()))
             .Callback<User, CancellationToken>((user, _) => user.Id = 42)
-            .Returns(Task.CompletedTask);
-
-        _unitOfWorkMock
-            .Setup(x => x.CommitAsync(It.IsAny<CancellationToken>()))
             .Returns(Task.CompletedTask);
     }
 }
