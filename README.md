@@ -1,27 +1,60 @@
 # rate-limit-api
 
-**rate-limit-api** é uma API projetada com foco em demonstrar técnicas de **rate limiting**, **gestão de chaves de API (API Keys)** e controle de acesso baseado em planos de uso. O conteúdo da API será intencionalmente minimalista, permitindo que o foco esteja na arquitetura backend e nos mecanismos de limitação e segurança.
+**rate-limit-api** é uma API focada em demonstrar, de forma prática, a aplicação de técnicas de **rate limiting** e **controle de uso baseado em API Keys**. A funcionalidade da API é propositalmente simples, permitindo que o foco esteja na arquitetura do backend, segurança e escalabilidade.
 
-## ✨ Proposta
+---
 
-A proposta deste projeto é servir como uma base técnica para:
+## 🎯 Proposta
 
-- Emissão e validação de chaves de API
-- Rate limiting por chave e/ou IP
-- Controle de quota diária por plano (ex: Free, Pro)
-- Diferenciação de limites por tipo de requisição (GET/POST, endpoint, etc.)
-- Logging de acessos e monitoramento de uso
+Este projeto tem como principal objetivo servir como base técnica para estudar e implementar:
 
-## 🚀 Objetivo
+- Emissão, autenticação e revogação de **API Keys**
+- Limitação de requisições por **chave de API**
+- Planos com diferentes quotas e limites (ex: Free, Pro)
+- Suporte a múltiplas chaves por usuário
+- Observabilidade: logging, métricas e rastreio de consumo
 
-Criar uma API com propósito simples, mas com implementação robusta no backend. O objetivo é estudar e aplicar boas práticas de:
+---
 
-- Controle de acesso e segurança
-- Uso de Redis ou banco temporário para contadores de taxa
-- Design de middleware para autenticação e limitação de requisições
-- Preparação de APIs para cenários de produção com múltiplos clientes
+## 💡 Objetivo Técnico
+
+Construir uma API minimalista, mas com um backend robusto, utilizando:
+
+- **Autenticação por API Key** com controle por plano
+- **Rate limiting via middleware**, usando Redis como armazenamento de contadores
+- **Mecanismos de throttling configuráveis** por plano e endpoint
+- **Infraestrutura preparada para múltiplos clientes** e ambientes
+
+---
+
+## 🔧 Tecnologias
+
+- [.NET 8](https://dotnet.microsoft.com/)
+- PostgreSQL (persistência de usuários e chaves)
+- Redis (rate limiting e cache)
+- FluentMigrator (versionamento do banco de dados)
+- xUnit, Moq, FluentAssertions (testes automatizados)
+
+---
+
+## 🛠️ Em desenvolvimento
+
+- [x] Criação e autenticação de usuários
+- [ ] Geração de API Keys por usuário
+- [ ] Middleware de autenticação por API Key
+- [ ] Middleware de rate limit por plano e endpoint
+- [ ] Registro de uso e monitoramento
+- [ ] Painel ou endpoint de estatísticas
+
+---
 
 ## 📄 Licença
 
-Este projeto será licenciado sob os termos da **GPL v3.0**.  
-Consulte o arquivo [`LICENSE`](./LICENSE) para mais informações assim que for adicionado.
+Este projeto está licenciado sob os termos da **GPL v3.0**.  
+Veja o arquivo [`LICENSE`](./LICENSE) para mais detalhes.
+
+---
+
+## 📬 Contribuindo
+
+Sinta-se à vontade para abrir issues ou pull requests. Toda contribuição é bem-vinda.
