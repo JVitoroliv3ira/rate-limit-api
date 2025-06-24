@@ -1,5 +1,8 @@
 
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RateLimit.Application.Interfaces.Core;
 using RateLimit.Application.Interfaces.Services;
 using RateLimit.Application.Interfaces.UseCases;
@@ -21,6 +24,29 @@ var connectionString = builder.Configuration.GetConnectionString("Default") ?? t
 builder.Services.AddMigrationRunner(connectionString);
 builder.Services.AddDbContext<AppDbContext>(o => o.UseNpgsql(connectionString));
 
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+var key = jwtSettings["Key"];
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!))
+    };
+});
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
@@ -38,6 +64,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
