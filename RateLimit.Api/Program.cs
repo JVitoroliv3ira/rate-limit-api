@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RateLimit.Application.Interfaces.Core;
 using RateLimit.Application.Interfaces.Services;
 using RateLimit.Application.Interfaces.UseCases;
+using RateLimit.Application.UseCases.Auth;
 using RateLimit.Application.UseCases.Users;
 using RateLimit.Infrastructure.MigrationRunner;
 using RateLimit.Infrastructure.Persistence;
@@ -24,8 +25,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddScoped<IPasswordHasher, BcryptPasswordHasher>();
+builder.Services.AddScoped<ITokenService, JwtService>();
 
 builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
+builder.Services.AddScoped<IAuthenticateUserUseCase, AuthenticateUserUseCase>();
 
 var app = builder.Build();
 
