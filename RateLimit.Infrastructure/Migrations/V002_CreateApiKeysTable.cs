@@ -13,6 +13,7 @@ public class V002_CreateApiKeysTable : Migration
     {
         Create.Table(TableName)
             .WithColumn("ID").AsInt32().PrimaryKey().Identity()
+            .WithColumn("NAME").AsString(64).NotNullable()
             .WithColumn("KEY").AsString(128).NotNullable()
             .WithColumn("IS_ACTIVE").AsBoolean().NotNullable().WithDefaultValue(true)
             .WithColumn("CREATED_AT").AsDateTime().NotNullable().WithDefault(SystemMethods.CurrentUTCDateTime)

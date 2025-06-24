@@ -29,6 +29,7 @@ public class AppDbContext : DbContext
             e.HasKey(k => k.Id);
             
             e.Property(k => k.Id).HasColumnName("ID");
+            e.Property(k => k.Name).HasColumnName("NAME");
             e.Property(k => k.Key).HasColumnName("KEY");
             e.Property(k => k.IsActive).HasColumnName("IS_ACTIVE");
             e.Property(k => k.CreatedAt).HasColumnName("CREATED_AT");
