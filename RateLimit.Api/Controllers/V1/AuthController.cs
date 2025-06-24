@@ -6,7 +6,7 @@ namespace RateLimit.Api.Controllers.V1;
 
 [Route("api/v1/[controller]")]
 [ApiController]
-public class UserController(
+public class AuthController(
     ICreateUserUseCase createUserUseCase    
 ) : ControllerBase
 {
