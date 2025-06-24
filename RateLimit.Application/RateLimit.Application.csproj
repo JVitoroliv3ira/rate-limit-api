@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Dtos\Commands\" />
       <Folder Include="UseCases\ApiKeys\" />
     </ItemGroup>
 
