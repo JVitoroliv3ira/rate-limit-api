@@ -1,4 +1,14 @@
-POST http://localhost:5000/api/v1/user
+### Register user
+POST http://localhost:5000/api/v1/Auth/register
+Content-Type: application/json
+
+{
+  "email": "joao@example.com",
+  "password": "12345678"
+}
+
+### Authenticate
+POST http://localhost:5000/api/v1/Auth/token
 Content-Type: application/json
 
 {
