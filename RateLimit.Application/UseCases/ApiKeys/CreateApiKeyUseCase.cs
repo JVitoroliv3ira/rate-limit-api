@@ -11,7 +11,8 @@ namespace RateLimit.Application.UseCases.ApiKeys;
 public class CreateApiKeyUseCase(
     IRepository<User> userRepository,
     IRepository<ApiKey> apiKeyRepository,
-    ISignatureService signatureService
+    ISignatureService signatureService,
+    IUnitOfWork unitOfWork
 ) : ICreateApiKeyUseCase
 {
     public async Task<Either<ApiError, CreateApiKeyResult>> ExecuteAsync(
@@ -37,6 +38,7 @@ public class CreateApiKeyUseCase(
         };
 
         await apiKeyRepository.AddAsync(key, cancellationToken);
+        await unitOfWork.CommitAsync(cancellationToken);
 
         var result = new CreateApiKeyResult(
             Name: key.Name,
