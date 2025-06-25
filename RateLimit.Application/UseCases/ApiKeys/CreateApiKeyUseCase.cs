@@ -11,7 +11,7 @@ namespace RateLimit.Application.UseCases.ApiKeys;
 public class CreateApiKeyUseCase(
     IRepository<User> userRepository,
     IRepository<ApiKey> apiKeyRepository,
-    IApiTokenService apiTokenService
+    ISignatureService signatureService
 ) : ICreateApiKeyUseCase
 {
     public async Task<Either<ApiError, CreateApiKeyResult>> ExecuteAsync(
@@ -25,7 +25,7 @@ public class CreateApiKeyUseCase(
             return ApiError.Validation("User not found.");
         }
 
-        var (apiKey, hashedApiKey) = apiTokenService.Generate();
+        var (apiKey, hashedApiKey) = signatureService.Generate();
 
         var key = new ApiKey
         {

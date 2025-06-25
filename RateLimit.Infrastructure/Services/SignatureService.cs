@@ -4,7 +4,7 @@ using RateLimit.Application.Interfaces.Services;
 
 namespace RateLimit.Infrastructure.Services;
 
-public class ApiTokenService : IApiTokenService
+public class SignatureService : ISignatureService
 {
     public (string token, string hash) Generate()
     {
@@ -26,7 +26,7 @@ public class ApiTokenService : IApiTokenService
 
         return CryptographicOperations.FixedTimeEquals(a, b);
     }
-    
+
     private static string Hash(string input)
     {
         var bytes = Encoding.UTF8.GetBytes(input);
