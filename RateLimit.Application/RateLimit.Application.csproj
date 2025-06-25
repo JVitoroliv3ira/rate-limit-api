@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="UseCases\ApiKeys\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\RateLimit.Domain\RateLimit.Domain.csproj" />
     </ItemGroup>
 
