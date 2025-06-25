@@ -16,8 +16,12 @@ Content-Type: application/json
   "password": "12345678"
 }
 
-### GET Resource
+### POST Api Key
 
-GET http://localhost:5000/api/v1/Resource
+POST http://localhost:5000/api/v1/ApiKey
 Content-Type: application/json
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJqb2FvQGV4YW1wbGUuY29tIiwicGxhbiI6IkZyZWUiLCJqdGkiOiI0ZWEzNTU5OC1mY2UzLTRjNDctYmJhNS0wOTIxN2Y3NDFkODYiLCJleHAiOjE3NTA4MTUyODMsImlzcyI6IlJhdGVMaW1pdEFQSSIsImF1ZCI6IlJhdGVMaW1pdENsaWVudCJ9.abPIhn-mKmVzTaRO8nn1DICdey5orsSweZcE5jbh0Aw
+
+{
+    "Name": "Test"
+}
