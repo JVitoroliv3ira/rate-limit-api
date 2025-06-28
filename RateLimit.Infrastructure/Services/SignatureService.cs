@@ -14,20 +14,7 @@ public class SignatureService : ISignatureService
         return (token, hash);
     }
 
-    public bool Validate(string token, string hash)
-    {
-        if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(hash))
-            return false;
-
-        var tokenHash = Hash(token);
-
-        var a = Encoding.ASCII.GetBytes(tokenHash);
-        var b = Encoding.ASCII.GetBytes(hash.ToLower());
-
-        return CryptographicOperations.FixedTimeEquals(a, b);
-    }
-
-    private static string Hash(string input)
+    public string Hash(string input)
     {
         var bytes = Encoding.UTF8.GetBytes(input);
         var hash = SHA256.HashData(bytes);
