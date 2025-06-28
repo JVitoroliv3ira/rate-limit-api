@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using RateLimit.Application.Interfaces.Core;
 using RateLimit.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace RateLimit.Infrastructure.Repositories;
 
@@ -11,9 +12,20 @@ public class Repository<T>(
 {
     private readonly DbSet<T> _dbSet = dbContext.Set<T>();
 
-    public async Task<T?> GetByAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
+    public async Task<T?> GetByAsync(
+        Expression<Func<T, bool>> predicate,
+        CancellationToken cancellationToken,
+        params Expression<Func<T, object>>[] includes
+    )
     {
-        return await _dbSet.FirstOrDefaultAsync(predicate, cancellationToken);
+        IQueryable<T> query = _dbSet;
+
+        foreach (var include in includes)
+        {
+            query = query.Include(include);
+        }
+
+        return await query.FirstOrDefaultAsync(predicate, cancellationToken);
     }
 
     public async Task<IList<T>> ListByAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
