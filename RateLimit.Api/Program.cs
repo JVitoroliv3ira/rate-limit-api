@@ -54,6 +54,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddMemoryCache();
+
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
