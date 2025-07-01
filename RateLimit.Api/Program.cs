@@ -13,6 +13,7 @@ using RateLimit.Application.UseCases.ApiKeys;
 using RateLimit.Application.UseCases.Auth;
 using RateLimit.Application.UseCases.Users;
 using RateLimit.Domain.Interfaces;
+using RateLimit.Infrastructure.Adapters;
 using RateLimit.Infrastructure.MigrationRunner;
 using RateLimit.Infrastructure.Persistence;
 using RateLimit.Infrastructure.Repositories;
@@ -72,6 +73,8 @@ builder.Services.AddScoped<IAuthenticateUserUseCase, AuthenticateUserUseCase>();
 builder.Services.AddScoped<ICreateApiKeyUseCase, CreateApiKeyUseCase>();
 builder.Services.AddScoped<IDeleteApiKeyUseCase, DeleteApiKeyUseCase>();
 builder.Services.AddScoped<IChangePlanUseCase, ChangePlanUseCase>();
+
+builder.Services.AddSingleton(typeof(IApiLogger<>), typeof(LoggerAdapter<>));
 
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
 {
