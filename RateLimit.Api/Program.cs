@@ -70,6 +70,8 @@ builder.Services.AddScoped<IRateLimitStoreService, RedisRateLimitStoreService>()
 builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
 builder.Services.AddScoped<IAuthenticateUserUseCase, AuthenticateUserUseCase>();
 builder.Services.AddScoped<ICreateApiKeyUseCase, CreateApiKeyUseCase>();
+builder.Services.AddScoped<IDeleteApiKeyUseCase, DeleteApiKeyUseCase>();
+builder.Services.AddScoped<IChangePlanUseCase, ChangePlanUseCase>();
 
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
 {
